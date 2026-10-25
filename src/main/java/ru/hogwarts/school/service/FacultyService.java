@@ -4,11 +4,7 @@ import org.springframework.stereotype.Service;
 import ru.hogwarts.school.model.Faculty;
 import ru.hogwarts.school.repository.FacultyRepository;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.*;
 
 @Service
 public class FacultyService {
@@ -37,8 +33,8 @@ public class FacultyService {
             System.out.println("Факультет с ID: " + id + " не найден.");
             return null;
         }
-        updateFaculty.setIdFaculty(id);
-                return facultyRepository.save(updateFaculty);
+        updateFaculty.setId(id);
+        return facultyRepository.save(updateFaculty);
     }
 
     public boolean removeByIdFaculty(Long id) {
@@ -51,6 +47,10 @@ public class FacultyService {
     }
 
     public List<Faculty> filterByColor(String color) {
-        return facultyRepository.findByColorFaculty(color);
+        return facultyRepository.findByColor(color);
+    }
+
+    public Collection<Faculty> findByNameOrColor(String param) {
+        return facultyRepository.findByNameIgnoreCaseOrColorIgnoreCase(param, param);
     }
 }

@@ -4,11 +4,7 @@ import org.springframework.stereotype.Service;
 import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.repository.StudentRepository;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.*;
 
 @Service
 public class StudentService {
@@ -20,10 +16,7 @@ public class StudentService {
     }
 
     public Student addStudent(Student student) {
-        if (student == null) {
-            throw new IllegalArgumentException("Студент не может быть null");
-        }
-        return studentRepository.save(student);
+        return null;
     }
 
     public Student getByIdStudent(Long id) {
@@ -39,7 +32,7 @@ public class StudentService {
             System.out.println("Студент с ID: " + id + " не найден.");
             return null;
         }
-        updateStudent.setIdStudent(id);
+        updateStudent.setId(id);
         return studentRepository.save(updateStudent);
     }
 
@@ -53,6 +46,10 @@ public class StudentService {
     }
 
     public List<Student> filterByAge(int age) {
-        return studentRepository.findByIdStudent(age);
+        return studentRepository.findById(age);
+    }
+
+    public Collection<Student> findByAgeBetween(int min, int max) {
+        return studentRepository.findByAgeBetween(min, max);
     }
 }

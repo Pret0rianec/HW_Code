@@ -1,11 +1,14 @@
 package ru.hogwarts.school.controller;
 
+import org.hibernate.sql.ast.tree.expression.Collation;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.hogwarts.school.model.Faculty;
+import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.service.FacultyService;
 
+import java.util.Collection;
 import java.util.List;
 
 @RestController
@@ -59,5 +62,17 @@ public class FacultyController {
     public ResponseEntity<List<Faculty>> filterFacultiesByColor(@RequestParam String color) {
         List<Faculty> filteredFaculties = facultyService.filterByColor(color);
         return ResponseEntity.ok(filteredFaculties);
+    }
+
+    @GetMapping("search")
+    public ResponseEntity<Collection<Faculty>> findFacultyByNameOrColor(
+            @RequestParam("param") String param) {
+        Collection<Faculty> faculties = facultyService.findByNameOrColor(param);
+        return ResponseEntity.ok(faculties);
+    }
+    @GetMapping("{id}/students")
+    public ResponseEntity<Collection<Student>> getStudentsByFacultyId(@PathVariable Long id){
+        Collection<Student> students = facultyService.getByIdFaculty(id).getStudents();
+        return ResponseEntity.ok(students);
     }
 }

@@ -1,49 +1,54 @@
 package ru.hogwarts.school.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.Set;
 
 @Entity
 public class Faculty {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long idFaculty;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_faculty")
+    private Long id;
 
-    private String nameFaculty;
-    private String colorFaculty;
+    private String name;
+    private String color;
+
+    @OneToMany(mappedBy = "faculty")
+    private Set<Student> students;
 
     public Faculty() {}
 
-    public Faculty(Long idFaculty, String nameFaculty, String colorFaculty) {
-        this.idFaculty = idFaculty;
-        this.nameFaculty = nameFaculty;
-        this.colorFaculty = colorFaculty;
+    public Faculty(Long id, String name, String color) {
+        this.id = id;
+        this.name = name;
+        this.color = color;
     }
 
-    public Long getIdFaculty() {
-        return idFaculty;
+    public Set<Student> getStudents() {return students;}
+
+    public Long getId() {
+        return id;
     }
 
-    public String getNameFaculty() {
-        return nameFaculty;
+    public String getName() {
+        return name;
     }
 
-    public String getColorFaculty() {
-        return colorFaculty;
+    public String getColor() {
+        return color;
     }
 
-    public void setIdFaculty(Long id) {
-        this.idFaculty = id;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public void setNameFaculty(String name) {
-        this.nameFaculty = name;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setColorFaculty(String color) {
-        this.colorFaculty = color;
+    public void setColor(String color) {
+        this.color = color;
     }
 
 }

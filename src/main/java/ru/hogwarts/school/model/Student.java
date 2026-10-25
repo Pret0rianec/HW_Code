@@ -1,48 +1,55 @@
 package ru.hogwarts.school.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 
 @Entity
 public class Student {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long idStudent;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_student")
+    private Long id;
 
-    private String nameStudent;
-    private int ageStudent;
+    private String name;
+    private int age;
+
+
+    @ManyToOne
+    @JoinColumn(name = "faculty")
+    @JsonIgnore
+    private Faculty faculty;
 
     public Student() {}
 
-    public Student(Long idStudent, String nameStudent, int ageStudent) {
-        this.idStudent = idStudent;
-        this.nameStudent = nameStudent;
-        this.ageStudent = ageStudent;
+    public Student(Long id, String name, int age) {
+        this.id = id;
+        this.name = name;
+        this.age = age;
     }
 
-    public Long getIdStudent() {
-        return idStudent;
+    public Faculty getFaculty() {return faculty;}
+
+    public Long getId() {
+        return id;
     }
 
-    public String getNameStudent() {
-        return nameStudent;
+    public String getName() {
+        return name;
     }
 
-    public int getAgeStudent() {
-        return ageStudent;
+    public int getAge() {
+        return age;
     }
 
-    public void setIdStudent(Long idStudent) {
-        this.idStudent = idStudent;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public void setNameStudent(String nameStudent) {
-        this.nameStudent = nameStudent;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setAgeStudent(int ageStudent) {
-        this.ageStudent = ageStudent;
+    public void setAge(int age) {
+        this.age = age;
     }
 }
