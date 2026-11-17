@@ -16,7 +16,7 @@ public class StudentService {
     }
 
     public Student addStudent(Student student) {
-        return null;
+        return studentRepository.save(student);
     }
 
     public Student getByIdStudent(Long id) {

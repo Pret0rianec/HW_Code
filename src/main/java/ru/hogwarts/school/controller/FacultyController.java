@@ -1,6 +1,5 @@
 package ru.hogwarts.school.controller;
 
-import org.hibernate.sql.ast.tree.expression.Collation;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -70,8 +69,9 @@ public class FacultyController {
         Collection<Faculty> faculties = facultyService.findByNameOrColor(param);
         return ResponseEntity.ok(faculties);
     }
+
     @GetMapping("{id}/students")
-    public ResponseEntity<Collection<Student>> getStudentsByFacultyId(@PathVariable Long id){
+    public ResponseEntity<Collection<Student>> getStudentsByFacultyId(@PathVariable Long id) {
         Collection<Student> students = facultyService.getByIdFaculty(id).getStudents();
         return ResponseEntity.ok(students);
     }
