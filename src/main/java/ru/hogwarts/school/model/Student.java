@@ -16,8 +16,11 @@ public class Student {
 
     @ManyToOne
     @JoinColumn(name = "faculty")
-    @JsonIgnore
     private Faculty faculty;
+
+    @OneToOne(mappedBy = "student")
+    @JsonIgnore
+    private Avatar avatar;
 
     public Student() {}
 
@@ -26,6 +29,8 @@ public class Student {
         this.name = name;
         this.age = age;
     }
+
+    public void setFaculty(Faculty faculty) {this.faculty = faculty;}
 
     public Faculty getFaculty() {return faculty;}
 
@@ -52,4 +57,8 @@ public class Student {
     public void setAge(int age) {
         this.age = age;
     }
+
+    public Avatar getAvatar() {return avatar;}
+
+    public void setAvatar(Avatar avatar) {this.avatar = avatar;}
 }
