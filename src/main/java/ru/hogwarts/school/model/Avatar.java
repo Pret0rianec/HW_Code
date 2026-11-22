@@ -1,5 +1,6 @@
 package ru.hogwarts.school.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -16,6 +17,7 @@ public class Avatar {
 
     @Lob
     @Column(columnDefinition = "oid")
+    @JsonIgnore
     private byte[] data;
 
     @OneToOne
