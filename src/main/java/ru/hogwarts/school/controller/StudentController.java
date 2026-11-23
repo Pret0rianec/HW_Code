@@ -1,5 +1,6 @@
 package ru.hogwarts.school.controller;
 
+import org.apache.commons.lang3.IntegerRange;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -78,6 +79,21 @@ public class StudentController {
     public ResponseEntity<Faculty> getFacultyByStudentId(@PathVariable Long id) {
         Faculty faculty = studentService.getByIdStudent(id).getFaculty();
         return ResponseEntity.ok(faculty);
+    }
+
+    @GetMapping("/count")
+    public Integer getTotalCountOfStudents() {
+        return studentService.getTotalCountOfStudents();
+    }
+
+    @GetMapping("/avereage-age")
+    public Double getAverageAgeOfStudents() {
+        return studentService.getAverageAgeOfStudents();
+    }
+
+    @GetMapping("/last-five")
+    public List<Student> getLastFiveStudents() {
+        return studentService.getLastFiveStudents();
     }
 }
 
